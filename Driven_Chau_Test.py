@@ -20,7 +20,7 @@ LTC.add_instructions(
 )
 
 with open('times_log.txt', 'w') as f:
-    f.write("start time: " + start)
+    f.write("start time: " + str(start))
     for setting in itertools.product(range(steps), repeat=4):
         LTC.set_component_value('L1', str(starting_vals[0] + setting[0]*10) + "m")
         LTC.set_component_value('L2', str(starting_vals[1] + setting[1]) + "m")
@@ -31,8 +31,9 @@ with open('times_log.txt', 'w') as f:
         LTC.run(run_filename=run_netlist_file, callback=processing_data)
         t = time.time()
         iteration_duration = t - start
-        f.write(iteration_duration + "\n")
-        print(str("This iteration took: ", datetime.timedelta(seconds=iteration_duration)))
+        f.write(str(iteration_duration) + "\n")
+        print("This iteration took: ")
+        print(datetime.timedelta(seconds=iteration_duration))
     
 
     # Sim Statistics
